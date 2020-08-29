@@ -66,10 +66,30 @@ var minNumGen = 1;
 var maxNumGen = 100;
 var bombsArray = arrayRandomNumbers(bombsQuantity, minNumGen, maxNumGen);
 
-
 // ask the user a number between 1 and 100
 // - if the number is inside the array "" the game end
 // - else ask an other number (the user cannot use the number more than once)
 // until the user reach the maximum of the "legit" numbers (100 - 16)
-
 // at the end of the game, the game will alert the user the level that he has reached befor the end of the game
+
+var userNumbers = [];
+var game = true;
+
+var i = 0;
+while (game && (i < (maxNumGen - minNumGen + 1) - bombsQuantity)) {
+
+  var userNumber = parseInt(prompt("inserisci un numero compreso tra 1 e 100"));
+  while (isInside(userNumbers, userNumber)) {
+    userNumber = parseInt(prompt("Hai già inserito questo numero\ninserisci un numero compreso tra 1 e 100"));
+  }
+  if (isInside(bombsArray, userNumber)) {
+    alert("BOOOOOOOOM!!!")
+    alert("Hai perso!!!\nSei arrivato al livello " + userNumbers.length);
+    game = false;
+  } else {
+    alert("Sei riuscito ad evitare la bomba...");
+    alert("Hai superato il " + (userNumbers.length + 1) + "° livello");
+    userNumbers.push(userNumber);
+  }
+  i++;
+}
