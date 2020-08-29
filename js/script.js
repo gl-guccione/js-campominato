@@ -31,11 +31,27 @@ function isInside(array, num) {
   }
 }
 
-// create a function that create an array with x random different numbers => arrayRandomNumbers(num)
+// create a function that create an array with x random DIFFERENT numbers => arrayRandomNumbers(num)
 
-function arrayRandomNumbers(numElements) {
+function arrayRandomNumbers(quantityElementGen, minNumGen, maxNumGen) {
+
+  if (quantityElementGen > (maxNumGen - minNumGen + 1)) {
+    return alert("ERROR");
+  }
+
   var myArray = [];
 
+  for (var i = 0; i < quantityElementGen; i++) {
+    var tempRandomNumber = randomNumber(minNumGen, maxNumGen);
+
+    while (isInside(myArray, tempRandomNumber)) {
+      tempRandomNumber = randomNumber(minNumGen, maxNumGen);
+    }
+
+    myArray.push(tempRandomNumber);
+  }
+
+  return myArray;
 }
 
 
@@ -44,6 +60,12 @@ function arrayRandomNumbers(numElements) {
 // script
 
 // generate an array with 16 random number between 1 and 100 without repetition
+
+var bombsQuantity = 16;
+var minNumGen = 1;
+var maxNumGen = 100;
+var bombsArray = arrayRandomNumbers(bombsQuantity, minNumGen, maxNumGen);
+
 
 // ask the user a number between 1 and 100
 // - if the number is inside the array "" the game end
