@@ -79,6 +79,9 @@ var i = 0;
 while (game && (i < (maxNumGen - minNumGen + 1) - bombsQuantity)) {
 
   var userNumber = parseInt(prompt("inserisci un numero compreso tra 1 e 100"));
+  while ((userNumber < minNumGen) || (userNumber > maxNumGen) || isNaN(userNumber)) {
+    userNumber = parseInt(prompt("Il numero inserito non è compreso tra 1 e 100\ninserisci un numero compreso tra 1 e 100"));
+  }
   while (isInside(userNumbers, userNumber)) {
     userNumber = parseInt(prompt("Hai già inserito questo numero\ninserisci un numero compreso tra 1 e 100"));
   }
@@ -92,4 +95,8 @@ while (game && (i < (maxNumGen - minNumGen + 1) - bombsQuantity)) {
     userNumbers.push(userNumber);
   }
   i++;
+}
+if (game) {
+  alert("Complimenti\nHai sconfitto il gioco!!!");
+  alert("lo so che hai usato la console per leggere i numeri vietati...VERGOGNATI!!!");
 }
