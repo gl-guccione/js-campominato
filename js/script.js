@@ -59,11 +59,30 @@ function arrayRandomNumbers(quantityElementGen, minNumGen, maxNumGen) {
 
 // script
 
+// ask the user the difficulty of the game
+// "facile" == minNumGen = 1 maxNumGen = 100
+// "media" == minNumGen = 1 maxNumGen = 80
+// "difficile" == minNumGen = 1 maxNumGen = 50
+
+alert("Ciao e benvenuto/a su Campo Minato")
+var difficulty = prompt("Seleziona la difficoltà scrivendo \"facile\", \"media\" o \"difficile\"").toLowerCase();
+
+while ((difficulty != "facile") && (difficulty != "media") && (difficulty != "difficile")) {
+  difficulty = prompt("scrivi \"facile\", \"media\" o \"difficile\" per selezionare la difficoltà!!!").toLowerCase();
+}
+
+if (difficulty == "facile") {
+  var maxNumGen = 100;
+} else if (difficulty == "media") {
+  var maxNumGen = 80;
+} else if (difficulty == "difficile") {
+  var maxNumGen = 50;
+}
+
 // generate an array with 16 random number between 1 and 100 without repetition
 
 var bombsQuantity = 16;
 var minNumGen = 1;
-var maxNumGen = 100;
 var bombsArray = arrayRandomNumbers(bombsQuantity, minNumGen, maxNumGen);
 
 // ask the user a number between 1 and 100
@@ -78,12 +97,13 @@ var game = true;
 var i = 0;
 while (game && (i < (maxNumGen - minNumGen + 1) - bombsQuantity)) {
 
-  var userNumber = parseInt(prompt("inserisci un numero compreso tra 1 e 100"));
-  while ((userNumber < minNumGen) || (userNumber > maxNumGen) || isNaN(userNumber)) {
-    userNumber = parseInt(prompt("Il numero inserito non è compreso tra 1 e 100\ninserisci un numero compreso tra 1 e 100"));
-  }
-  while (isInside(userNumbers, userNumber)) {
-    userNumber = parseInt(prompt("Hai già inserito questo numero\ninserisci un numero compreso tra 1 e 100"));
+  var userNumber = parseInt(prompt("inserisci un numero compreso tra " + minNumGen + " e " + maxNumGen));
+  while ((userNumber < minNumGen) || (userNumber > maxNumGen) || isNaN(userNumber) || isInside(userNumbers, userNumber)) {
+    if ((userNumber < minNumGen) || (userNumber > maxNumGen) || isNaN(userNumber)) {
+      userNumber = parseInt(prompt("Il numero inserito non è compreso tra " + minNumGen + " e " + maxNumGen + "\ninserisci un numero compreso tra " + minNumGen + " e " + maxNumGen));
+    } else if (isInside(userNumbers, userNumber)) {
+      userNumber = parseInt(prompt("Hai già inserito questo numero\ninserisci un numero compreso tra " + minNumGen + " e " + maxNumGen));
+    }
   }
   if (isInside(bombsArray, userNumber)) {
     alert("BOOOOOOOOM!!!")
