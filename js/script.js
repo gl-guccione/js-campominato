@@ -15,7 +15,11 @@
 
 // functions
 
-// create a function that generate a random number => randomNumber()
+// create a function that generate a random number => randomNumber(min, max)
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 // create a function that create an array with x random different numbers => arrayRandomNumbers(num)
 
