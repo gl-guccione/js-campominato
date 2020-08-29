@@ -21,9 +21,23 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// create a function that given an array, and a number check if that number is inside that array => isInside(array, num)
+
+function isInside(array, num) {
+  if (array.indexOf(num) != -1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 // create a function that create an array with x random different numbers => arrayRandomNumbers(num)
 
-// create a function that given an array, and a number check if that number is inside in that array => isInside(array, number)
+function arrayRandomNumbers(numElements) {
+  var myArray = [];
+
+}
+
 
 // --------------------------------------------------------------------------------------------------------
 
